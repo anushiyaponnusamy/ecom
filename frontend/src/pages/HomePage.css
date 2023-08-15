@@ -1,0 +1,49 @@
+.shopping-images-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    /* Ensures the content is vertically centered on the page */
+    background: linear-gradient(120deg, pink, skyblue);
+}
+
+.shopping-image-grid {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* Two columns */
+    gap: 20px;
+    /* Gap between images */
+}
+
+/* HomePage.css */
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.image-container img {
+    width: 200px;
+    height: 190px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.image-container img:hover {
+    transform: scale(1.05);
+}
+
+.image-container p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.heading_style {
+    font-family: cursive;
+    font-weight: 700;
+}
