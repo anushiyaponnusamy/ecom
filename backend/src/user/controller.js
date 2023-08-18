@@ -6,23 +6,18 @@ const userViewModel = require('./viewModel');
 const controller = {}
 controller.signUp = async (req) => {
     try {
-        if (!req.body && !req.body.userName && !req.body.email && !req.body.password && !req.body.mobile) return "field required";
+        if (!req.body && !req.body.userName && !req.body.email && !req.body.password && !req.body.question && !req.body.mobile) return "field required";
         const emailExists = await dbHelper.checkUserByEmail(req.body.email);
         if (emailExists) return "email already exists"
         const mobileNoExists = await dbHelper.checkUserByMobile(req.body.mobile);
         if (mobileNoExists) return "mobileNumber already exists"
         const hashedPassword = await hashPassword(req.body.password)
-        const isValid = await comparePassword(req.body.password, hashedPassword);
-        console.log(req.body.password, "||", hashedPassword)
-        if (isValid) {
-            const viewModels = userViewModel.signUpViewModel(req, hashedPassword);
-            const result = await dbHelper.signUp(viewModels);
-            const token = JWT.sign({ userId: result._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+        const viewModels = userViewModel.signUpViewModel(req, hashedPassword);
+        const result = await dbHelper.signUp(viewModels);
+        const token = JWT.sign({ userId: result._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-            return { ...result._doc, token }
-        } else {
-            return "invalid credentials"
-        }
+        return { ...result._doc, token }
+
     } catch (error) {
         Promise.reject(error)
     }
@@ -48,7 +43,16 @@ controller.updateById = async () => {
         const viewModel = userViewModel.updateViewModel(req);
         return await dbHelper.updateById(viewModel);
     } catch (error) {
-        Promise.reject(error)
+        return Promise.reject(error)
+    }
+}
+
+controller.forgotpassword = async (req) => {
+    try {
+        if (!req.body.email && !req.body.question && !req.body.password) return "field required"
+        return await dbHelper.forgotpassword(req.body.email, req.body.question, req.body.password);
+    } catch (error) {
+        return Promise.reject(error)
     }
 }
 

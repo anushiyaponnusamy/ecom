@@ -5,6 +5,7 @@ import Image2 from '../images/shopping3.jpg';
 import Image3 from '../images/shopping4.jpg';
 import Image4 from '../images/shopping5.jpg';
 import './HomePage.css'; // Import the CSS file
+import Spinner from '../components/Spinner';
 
 const HomePage = () => {
     return (

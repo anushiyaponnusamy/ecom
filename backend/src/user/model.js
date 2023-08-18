@@ -23,6 +23,11 @@ const userSchema = new Mongoose.Schema({
     type: String,
     default: Roles[1]
   },
+  //reser pass word question
+  question: {
+    type: String,
+    required: true
+  },
   // soft delete
   active: {
     type: Boolean,

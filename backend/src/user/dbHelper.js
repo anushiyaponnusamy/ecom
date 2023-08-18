@@ -1,3 +1,4 @@
+const { hashPassword, comparePassword } = require('./helper');
 const UserSchema = require('./model')
 const dbHelper = {}
 
@@ -5,6 +6,26 @@ dbHelper.signUp = async (req) => {
     try {
         const obj = new UserSchema(req);
         return await obj.save();
+    } catch (error) {
+        Promise.reject(error)
+    }
+}
+dbHelper.forgotpassword = async (email, question, password) => {
+    try {
+        const user = await UserSchema.findOne({ email, question });
+        if (!user) {
+            return "email or secret question invalid";
+        } else {
+            const hashedPassword = await hashPassword(password)
+            const result = await UserSchema.updateOne({ email, question }, { password: hashedPassword })
+            if (result.modifiedCount === 1) {
+                return "password changed";
+            } else {
+                return "password unchanged"
+            }
+
+        }
+
     } catch (error) {
         Promise.reject(error)
     }

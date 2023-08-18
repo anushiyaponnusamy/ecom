@@ -7,6 +7,7 @@ userViewModel.signUpViewModel = (req, hashedPassword) => {
     viewModel.email = body.email;
     viewModel.password = hashedPassword;
     viewModel.mobile = body.mobile;
+    viewModel.question = body.question;
     return viewModel
 }
 userViewModel.updateViewModel = (req) => {

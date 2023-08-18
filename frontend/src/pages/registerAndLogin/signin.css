@@ -48,6 +48,22 @@
     font-size: 18px;
 }
 
+.password-input-container {
+    position: relative;
+}
+
+.password-visibility-toggle {
+    position: absolute;
+    right: 10px;
+    /* Adjust this value for proper alignment */
+    top: 50%;
+    /* Vertically centered */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
     .register-form {

@@ -2,12 +2,15 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { loginAPi } from './Signinservice';
 import './signin.css';
 import { FaExclamationCircle } from 'react-icons/fa';
-import Layout from '../layout/layout';
-
+import Layout from '../../components/layout/layout';
+import { useAuth } from '../../context/auth';
+import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
     const canLogin = useMemo(() => {
         return email !== '' && password !== '';
     }, [password, email]);
@@ -25,6 +28,16 @@ const LoginPage = () => {
                 localStorage.setItem('email', response.data.email);
                 localStorage.setItem('mobile', response.data.mobile);
                 localStorage.setItem('userId', response.data._id);
+                setAuth({
+                    ...auth,
+                    user: {
+                        userId: response.data._id,
+                        userName: response.data.userName,
+                        email: response.data.email,
+                        mobile: response.data.mobile,
+                    }, token: response.data.token
+                })
+                navigate("/")
             }
         } catch (error) {
             console.error(error);
@@ -53,11 +66,12 @@ const LoginPage = () => {
                     />
 
                     {errorMessage && <div className="error-message"><p ><FaExclamationCircle className='error-icon' />{errorMessage}</p></div>}
+
+                    <div onClick={() => navigate('/forget-password')} style={{ color: "blue" }} >forgot password?</div>
                     <button onClick={handleLogin} disabled={!canLogin} >Login</button>
                 </div>
             </div>
-        </Layout>
+        </Layout >
     );
 };
-
 export default LoginPage;

@@ -1,7 +1,41 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
+import React, { useEffect, useState } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+
+import { MdArrowDropDownCircle } from 'react-icons/md';
+import { useAuth } from '../../context/auth'
+import './header.css'
 const Header = () => {
+    const [auth, setAuth] = useAuth();
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [selectedValue, setSelectedValue] = useState("");
+    const navigate = useNavigate()
+
+    const handleDropdownChange = (event) => {
+        setSelectedValue(event);
+        setShowDropdown(false);
+
+    };
+
+
+    const handleLogOut = () => {
+        setAuth({ ...auth, user: null, token: "" });
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('email');
+        localStorage.removeItem('mobile');
+        localStorage.removeItem('userId');
+        navigate('/login')
+    }
+    useEffect(() => {
+        if (selectedValue === 'home') {
+            navigate('/')
+        } else if (selectedValue === 'dashboard') {
+            navigate('/dashboard')
+        } else if (selectedValue === 'logout') {
+            handleLogOut()
+        }
+    }, [selectedValue])
     return (
         <>
 
@@ -19,15 +53,32 @@ const Header = () => {
                             </li> <li className="nav-item">
                                 <NavLink className="nav-link " to="/category">Category</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/signup">Register</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/login">Login</NavLink>
-                            </li>
+
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/cart">Cart(0)</NavLink>
+                            </li>  {!auth.user ? <> <li className="nav-item">
+                                <NavLink className="nav-link" to="/signup">Register</NavLink>
                             </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/login">Login</NavLink>
+                                </li></> : <>
+                                <div className="nav-item dropdown">
+                                    <span className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                        {auth.user.username}
+                                    </span>
+                                    <div className="dropdown-menu dropdown-menu-end">
+                                        <div className="dropdown-item" style={{ color: "pink" }}>{auth?.user?.userName}</div>
+
+                                        <div className="dropdown-item" onClick={() => handleDropdownChange("home")}>Home</div>
+                                        <div className="dropdown-item" onClick={() => handleDropdownChange("dashboard")}>Dashboard</div>
+
+                                        <div className="dropdown-item" onClick={() => handleDropdownChange("logout")}>Logout</div>
+                                    </div>
+                                </div>
+
+
+
+                            </>}
                         </ul>
 
                     </div>

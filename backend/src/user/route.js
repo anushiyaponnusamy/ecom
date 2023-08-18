@@ -10,7 +10,16 @@ router.post('/signUp', (req, res, next) =>
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
-
+//protected route
+router.get('/user-auth', validationMiddleware.validateToken, (req, res) =>
+  res.status(200).send({ ok: true })
+);
+router.post('/forgotpassword', (req, res, next) =>
+  controller
+    .forgotpassword(req)
+    .then((data) => res.status(200).send(data))
+    .catch((err) => next(err))
+);
 router.post('/login', (req, res, next) =>
   controller
     .login(req)
