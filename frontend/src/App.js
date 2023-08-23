@@ -8,8 +8,13 @@ import PageNotFound from "./pages/PageNotFound";
 import RegisterPage from "./pages/registerAndLogin/Signin";
 import LoginPage from "./pages/registerAndLogin/Login";
 import Dashboard from "./pages/user/dashboard";
-import PrivateRoute from "./components/routes/PrivateRoute";
+import PrivateRoute from "./components/Routes/PrivateRoute";
 import Forgetpassword from "./pages/registerAndLogin/Forgetpassword";
+import AdminRoute from "./components/Routes/AdminRoute";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import CreateCategory from "./pages/admin/CreateCategory";
+import CreateProduct from "./pages/admin/CreateProduct";
+import UserList from "./pages/admin/UserList";
 const App = () => {
   return (
     <>
@@ -17,7 +22,14 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/forget-password" element={<Forgetpassword />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
-          <Route path="" element={<Dashboard />} /></Route>
+          <Route path="user" element={<Dashboard />} />
+        </Route>
+        <Route path="/dashboard" element={<AdminRoute />}>
+          <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/create-category" element={<CreateCategory />} />
+          <Route path="admin/users" element={<UserList />} />
+          <Route path="admin/create-product" element={<CreateProduct />} />
+        </Route>
         <Route path="/signup" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/about" element={<About />} />

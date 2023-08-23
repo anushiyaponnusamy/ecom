@@ -6,7 +6,11 @@ const validationMiddleware = {}
 validationMiddleware.validateToken = async (req, res, next) => {
     try {
         const decoded = jwtToken.verify(req.headers.authorization, process.env.JWT_SECRET);
-        req.decoded = decoded;
+        console.log("decoded", decoded)
+        if (decoded) {
+            const user = await dbHelper.getUserByUserId(decoded._id);
+            req.decoded = user;
+        }
         next();
     } catch (error) {
         return Promise.reject(error)
@@ -14,8 +18,8 @@ validationMiddleware.validateToken = async (req, res, next) => {
 }
 validationMiddleware.validateAdmin = async (req, res, next) => {
     try {
-        const user = await dbHelper.getUserByUserId(req.decoded._id)
-        if (user?.role === "admin")
+
+        if (req?.decoded?.role === "admin")
             next();
         else
             return "unauthorized ,not an admin"

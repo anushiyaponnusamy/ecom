@@ -12,7 +12,6 @@ const PrivateRoute = () => {
         const authCheck = async () => {
             const res = await axios.get(config.REACT_APP_API + '/auth/user-auth', { headers: { "Authorization": auth?.token } });
             if (res.data.ok) {
-                console.log("authCheck", res.data.ok)
                 setOk(res.data.ok)
             } else {
                 setOk(false)
@@ -20,7 +19,7 @@ const PrivateRoute = () => {
         }
         if (auth?.token) authCheck();
     }, [auth?.token])
-    return ok ? <Outlet /> : <Spinner />
+    return ok ? <Outlet /> : <Spinner path="/login" />
 }
 
 export default PrivateRoute

@@ -34,6 +34,7 @@ const RegisterPage = () => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('userName', response.data.userName);
                 localStorage.setItem('email', response.data.email);
+                localStorage.setItem('role', response.data.role);
                 localStorage.setItem('mobile', response.data.mobile);
                 localStorage.setItem('userId', response.data._id);
                 setAuth({
@@ -43,6 +44,7 @@ const RegisterPage = () => {
                         userName: response.data.userName,
                         email: response.data.email,
                         mobile: response.data.mobile,
+                        role: response.data.role,
                     }, token: response.data.token
                 })
                 navigate('/')

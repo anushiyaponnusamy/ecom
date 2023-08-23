@@ -19,7 +19,7 @@ controller.signUp = async (req) => {
         return { ...result._doc, token }
 
     } catch (error) {
-        Promise.reject(error)
+        return Promise.reject(error)
     }
 }
 
@@ -34,7 +34,7 @@ controller.login = async (req) => {
         const token = JWT.sign({ _id: userExists?._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
         return { email: userExists.email, _id: userExists?._id, mobile: userExists?.mobile, role: userExists?.role, userName: userExists?.userName, token }
     } catch (error) {
-        Promise.reject(error)
+        return Promise.reject(error)
     }
 }
 
@@ -58,9 +58,10 @@ controller.forgotpassword = async (req) => {
 
 controller.getAllUsers = async () => {
     try {
-        return await dbHelper.getAllUsers();
+       return await dbHelper.getAllUsers();
+
     } catch (error) {
-        Promise.reject(error)
+        return Promise.reject(error)
     }
 }
 
@@ -69,7 +70,7 @@ controller.getUserByUserId = async (req) => {
         if (!req.params.userId) return "field required";
         return await dbHelper.getUserByUserId(req.params.userId);
     } catch (error) {
-        Promise.reject(error)
+        return Promise.reject(error)
     }
 }
 
@@ -78,7 +79,7 @@ controller.deleteUserByUserId = async (req) => {
         if (!req.params.userId) return "field required";
         return await dbHelper.deleteUserByUserId(req.params.userId);
     } catch (error) {
-        Promise.reject(error)
+        return Promise.reject(error)
     }
 }
 module.exports = controller;

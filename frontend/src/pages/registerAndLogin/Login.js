@@ -26,6 +26,7 @@ const LoginPage = () => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('userName', response.data.userName);
                 localStorage.setItem('email', response.data.email);
+                localStorage.setItem('role', response.data.role);
                 localStorage.setItem('mobile', response.data.mobile);
                 localStorage.setItem('userId', response.data._id);
                 setAuth({
@@ -34,6 +35,7 @@ const LoginPage = () => {
                         userId: response.data._id,
                         userName: response.data.userName,
                         email: response.data.email,
+                        role: response.data.role,
                         mobile: response.data.mobile,
                     }, token: response.data.token
                 })

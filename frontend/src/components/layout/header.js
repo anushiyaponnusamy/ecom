@@ -9,8 +9,20 @@ const Header = () => {
     const [auth, setAuth] = useAuth();
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedValue, setSelectedValue] = useState("");
+    const role = localStorage.getItem("role")
     const navigate = useNavigate()
+    const LogoutUser = () => {
 
+        setAuth({ ...auth, user: null, token: "" });
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('email');
+        localStorage.removeItem('role');
+        localStorage.removeItem('mobile');
+        localStorage.removeItem('userId');
+
+        navigate('/login');
+    };
     const handleDropdownChange = (event) => {
         setSelectedValue(event);
         setShowDropdown(false);
@@ -18,22 +30,15 @@ const Header = () => {
     };
 
 
-    const handleLogOut = () => {
-        setAuth({ ...auth, user: null, token: "" });
-        localStorage.removeItem('token');
-        localStorage.removeItem('userName');
-        localStorage.removeItem('email');
-        localStorage.removeItem('mobile');
-        localStorage.removeItem('userId');
-        navigate('/login')
-    }
+
     useEffect(() => {
         if (selectedValue === 'home') {
             navigate('/')
         } else if (selectedValue === 'dashboard') {
-            navigate('/dashboard')
+
+            navigate(`/dashboard/${role === 'admin' ? "admin" : "user"}`)
         } else if (selectedValue === 'logout') {
-            handleLogOut()
+            LogoutUser();
         }
     }, [selectedValue])
     return (
@@ -62,12 +67,12 @@ const Header = () => {
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/login">Login</NavLink>
                                 </li></> : <>
+
                                 <div className="nav-item dropdown">
                                     <span className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                                        {auth.user.username}
+                                        <span className="username">{auth?.user?.userName}</span>
                                     </span>
                                     <div className="dropdown-menu dropdown-menu-end">
-                                        <div className="dropdown-item" style={{ color: "pink" }}>{auth?.user?.userName}</div>
 
                                         <div className="dropdown-item" onClick={() => handleDropdownChange("home")}>Home</div>
                                         <div className="dropdown-item" onClick={() => handleDropdownChange("dashboard")}>Dashboard</div>

@@ -10,10 +10,16 @@ router.post('/signUp', (req, res, next) =>
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
-//protected route
-router.get('/user-auth', validationMiddleware.validateToken, (req, res) =>
+//protected route for user
+router.get('/user-auth', validationMiddleware.validateToken, (req, res) => {
+  res.status(200).send({ ok: true })
+}
+);
+//protected route for admin
+router.get('/admin-auth', validationMiddleware.validateToken, validationMiddleware.validateAdmin, (req, res) =>
   res.status(200).send({ ok: true })
 );
+
 router.post('/forgotpassword', (req, res, next) =>
   controller
     .forgotpassword(req)
@@ -34,7 +40,7 @@ router.post('/updateById', validationMiddleware.validateToken, (req, res, next) 
     .catch((err) => next(err))
 );
 
-router.get('/getAllUsers', (req, res, next) =>
+router.get('/getAllUsers', validationMiddleware.validateToken, (req, res, next) =>
   controller
     .getAllUsers()
     .then((data) => res.status(200).send(data))
