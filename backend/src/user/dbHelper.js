@@ -1,5 +1,6 @@
 const { hashPassword, comparePassword } = require('./helper');
 const UserSchema = require('./model')
+const { Types } = require('mongoose');
 const dbHelper = {}
 
 dbHelper.signUp = async (req) => {
@@ -45,9 +46,10 @@ dbHelper.checkUserByMobile = (mobile) => {
         return Promise.reject(error)
     }
 }
-dbHelper.updateById = (userId, viewModel) => {
+dbHelper.updateById = async (userId, uName) => {
     try {
-        return UserSchema.updateOne({ _id: userId }, { $set: { ...viewModel } })
+        return await UserSchema.findOneAndUpdate({ _id: userId }, { $set: { userName: uName } }, { new: true });
+
     } catch (error) {
         return Promise.reject(error)
     }

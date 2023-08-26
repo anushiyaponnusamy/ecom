@@ -8,7 +8,19 @@ const headers = {
         Authorization: accessToken,
     },
 };
+const uploadImage = async (selectedFile) => {
 
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+    const response = await axios.post(config.REACT_APP_API + 'uploadImage', formData, { headers });
+    return response;
+
+};
+const createCategory = async (name) => {
+
+    let response = await axios.post(config.REACT_APP_API + '/category/create-category', { name }, headers);
+    return response;
+};
 
 const getAllUsers = async () => {
 
@@ -16,5 +28,5 @@ const getAllUsers = async () => {
     return response;
 };
 export {
-    getAllUsers
+    getAllUsers, createCategory, uploadImage
 };

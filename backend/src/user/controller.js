@@ -38,10 +38,9 @@ controller.login = async (req) => {
     }
 }
 
-controller.updateById = async () => {
+controller.updateById = async (req) => {
     try {
-        const viewModel = userViewModel.updateViewModel(req);
-        return await dbHelper.updateById(viewModel);
+        return dbHelper.updateById(req.decoded._id, req.body.userName);
     } catch (error) {
         return Promise.reject(error)
     }
@@ -58,7 +57,7 @@ controller.forgotpassword = async (req) => {
 
 controller.getAllUsers = async () => {
     try {
-       return await dbHelper.getAllUsers();
+        return await dbHelper.getAllUsers();
 
     } catch (error) {
         return Promise.reject(error)

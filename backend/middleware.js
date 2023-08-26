@@ -5,8 +5,9 @@ const validationMiddleware = {}
 
 validationMiddleware.validateToken = async (req, res, next) => {
     try {
+        console.log(req.headers.authorization)
         const decoded = jwtToken.verify(req.headers.authorization, process.env.JWT_SECRET);
-        console.log("decoded", decoded)
+
         if (decoded) {
             const user = await dbHelper.getUserByUserId(decoded._id);
             req.decoded = user;

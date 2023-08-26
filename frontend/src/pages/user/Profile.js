@@ -1,82 +1,29 @@
-// // ProfilePage.js
-// import React, { useState } from 'react';
-// import './Profile.css';
-// import { RxAvatar } from 'react-icons/rx'
-// import { Button } from '@mui/material';
-// function Profile() {
-//     const [profilePhoto, setProfilePhoto] = useState("")
 
-//     const [editClicked, setEditClicked] = useState(false)
-//     const handleEdit = () => setEditClicked(!editClicked)
-//     const userName = localStorage.getItem('userName');
-//     const email = localStorage.getItem('email');
-//     const role = localStorage.getItem('role');
-//     const mobile = localStorage.getItem('mobile');
-//     return (
-//         <div className="profile-container">
-//             <div className="profile-info">
-//                 <div className="profile-picture-container">
-//                     {profilePhoto ? <img src="profile-photo.jpg" alt="Profile" className="profile-picture" />
-//                         : <div >
-//                             <RxAvatar size={70} />
-//                         </div>}
-//                 </div>
-//                 <div className="user-details">
-//                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-//                         <h2>User Name:</h2>
-//                         <div className="detail-value">{userName}</div>
-//                     </div>
-//                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-//                         <h2>Email:</h2>
-//                         <div className="detail-value">{email}</div>
-//                     </div>
-//                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-//                         <h2>Mobile:</h2>
-//                         <div className="detail-value">{mobile}</div>
-//                     </div>
-//                     <div className={editClicked ? 'button-css-clicked' : 'button-css-unclicked'}>
-//                         <Button variant='contained' onClick={() => handleEdit()}>Edit</Button>
-//                         {editClicked && <Button variant='contained'>cancel</Button>}
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default Profile;
-// ProfilePage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import { RxAvatar } from 'react-icons/rx'
 import { Button } from '@mui/material';
-import { updateUserdetails } from './service';
+import { getUserdetails, updateUserdetails } from './service';
 
 function Profile() {
-    const [userName, setUserName] = useState(localStorage.getItem('userName'));
-    const [profilePhoto, setProfilePhoto] = useState('');
+    const [userDetails, setUserDetails] = useState({
+        userName: '',
+        email: '',
+        profilePhoto: '',
+        mobile: ''
+    });
     const [editClicked, setEditClicked] = useState(false);
-    //     const userName = localStorage.getItem('userName');
-    const email = localStorage.getItem('email');
-    const role = localStorage.getItem('role');
-    const mobile = localStorage.getItem('mobile');
+
+    const userId = localStorage.getItem('userId');
     const handleEdit = () => {
         setEditClicked(!editClicked)
     };
 
-    const handleProfilePhotoChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-            setProfilePhoto(reader.result);
-        };
-        reader.readAsDataURL(file);
-    };
     const handleSave = () => {
-        updateUserdetails(userName).then((response) => {
+        updateUserdetails(userDetails?.userName).then((response) => {
             console.log(response)
             if (response?.data?.modifiedCount === 1) {
-                localStorage.setItem('userName', userName)
+                localStorage.setItem('userName', userDetails?.userName)
                 setEditClicked(!editClicked)
             }
         }).catch((error) => {
@@ -85,8 +32,8 @@ function Profile() {
         setEditClicked(!editClicked)
     }
     const renderProfilePhoto = () => {
-        if (profilePhoto) {
-            return <img src={profilePhoto} alt="Profile" className="profile-picture" />;
+        if (userDetails?.profilePhoto) {
+            return <img src={userDetails?.profilePhoto} alt="Profile" className="profile-picture" />;
         } else {
             return (
                 <div>
@@ -95,7 +42,16 @@ function Profile() {
             );
         }
     };
-
+    const handleChangeName = (name) => {
+        setUserDetails({ ...userDetails, userName: name })
+    }
+    useEffect(() => {
+        getUserdetails(userId).then((response) => {
+            if (response.data) {
+                setUserDetails({ userName: response.data.userName, email: response.data.email, mobile: response.data.mobile })
+            }
+        })
+    }, [])
     return (
         <div className="profile-container">
             <div className="profile-info">
@@ -112,26 +68,27 @@ function Profile() {
                 </div>
                 <div className="user-details">
                     <div className='user-details-row'>
-                        <h2 style={{ color: 'linen' }}>User Name:</h2>
+                        <div className="label"> <h2 style={{ color: '#837b73' }}>User Name</h2></div>
                         {editClicked ? (
-                            <input
+                            <div>   : <input
                                 type="text"
-                                value={userName}
-                                onChange={(e) => setUserName(e.target.value)}
-                            />
+                                value={userDetails?.userName}
+                                onChange={(e) => handleChangeName(e.target.value)}
+                            /></div>
                         ) : (
-                            <div className="detail-value">{userName}</div>
+                            <div className="detail-value">:    {userDetails?.userName}</div>
                         )}
                     </div>
                     <div className='user-details-row'>
-                        <h2 style={{ color: 'linen' }}>Email:</h2>
-                        <div className="detail-value">{email}</div>
+                        <div className="label">  <h2 style={{ color: '#837b73' }}>Email</h2>  </div>
+                        <div className="detail-value">:    {userDetails?.email}</div>
                     </div>
                     <div className='user-details-row'>
-                        <h2 style={{ color: 'linen' }}>Mobile:</h2>
-                        <div className="detail-value">{mobile}</div>
+                        <div className="label">  <h2 style={{ color: '#837b73' }}>Mobile</h2>  </div>
+                        <div className="detail-value">:    {userDetails?.mobile}</div>
                     </div>
                 </div>
+
                 <div className={editClicked ? 'button-css-clicked' : 'button-css-unclicked'}>
                     {!editClicked && <Button variant='contained' onClick={() => handleEdit()}>
                         Edit
