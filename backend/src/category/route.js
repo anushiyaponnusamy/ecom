@@ -12,9 +12,9 @@ router.post('/create-category', validationMiddleware.validateToken, validationMi
 );
 
 
-router.get('/getAllCategory', (req, res, next) =>
+router.get('/getAllCategories', (req, res, next) =>
   controller
-    .getAllCategory(req)
+    .getAllCategories(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );

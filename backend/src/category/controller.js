@@ -17,17 +17,17 @@ controller.createcategory = async (req) => {
 
 controller.updatecategory = async (req) => {
     try {
-        if (!req.params.name && !req.params.categoryId) return 'field required';
+        if (!req.body.name && !req.body.categoryId) return 'field required';
 
-        return await dbHelper.updatecategory(req.params.categoryId, req.params.name);
+        return await dbHelper.updatecategory(req.body.categoryId, req.body.name);
     } catch (error) {
         return Promise.reject(error)
     }
 }
 
-controller.getAllCategory = async () => {
+controller.getAllCategories = async () => {
     try {
-        return await dbHelper.getAllCategory();
+        return await dbHelper.getAllCategories();
     } catch (error) {
         return Promise.reject(error)
     }

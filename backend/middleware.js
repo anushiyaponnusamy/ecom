@@ -5,7 +5,6 @@ const validationMiddleware = {}
 
 validationMiddleware.validateToken = async (req, res, next) => {
     try {
-        console.log(req.headers.authorization)
         const decoded = jwtToken.verify(req.headers.authorization, process.env.JWT_SECRET);
 
         if (decoded) {

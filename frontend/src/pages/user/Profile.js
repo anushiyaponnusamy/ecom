@@ -21,7 +21,6 @@ function Profile() {
 
     const handleSave = () => {
         updateUserdetails(userDetails?.userName).then((response) => {
-            console.log(response)
             if (response?.data?.modifiedCount === 1) {
                 localStorage.setItem('userName', userDetails?.userName)
                 setEditClicked(!editClicked)

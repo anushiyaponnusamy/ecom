@@ -18,7 +18,7 @@ dbHelper.checkCategory = (name) => {
         return Promise.reject(error)
     }
 }
-dbHelper.getAllCategory = () => {
+dbHelper.getAllCategories = () => {
     try {
         return CategorySchema.find({});
     } catch (error) {

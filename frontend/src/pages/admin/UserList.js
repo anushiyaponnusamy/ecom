@@ -7,7 +7,6 @@ const UserList = () => {
     useEffect(() => {
         getAllUsers().then((response) => {
             setUsers(response.data);
-            console.log(response.data)
         }).catch((error) => {
             console.log(error)
         })

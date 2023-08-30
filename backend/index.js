@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 const authRouter = require('./src/user/route')
 const categoryRouter = require('./src/category/route')
+const productRouter = require('./src/product/route')
 const cors = require("cors");
 const connectToMongoDb = require("./mongodbConnection/databaseConnection");
 const uploadMiddleware = require("./src/uploadImage");
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/auth', authRouter)
 app.use('/category', categoryRouter)
+app.use('/product', productRouter)
 app.get("/", (req, res) => {
   res.send({
     message: "root:ok",
