@@ -32,6 +32,9 @@ const Header = () => {
 
 
     useEffect(() => {
+        if (!auth?.user?.userName) {
+            LogoutUser();
+        }
         if (selectedValue === 'home') {
             navigate('/')
         } else if (selectedValue === 'dashboard') {

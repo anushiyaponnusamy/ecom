@@ -12,7 +12,7 @@ router.post('/create-product', validationMiddleware.validateToken, validationMid
 );
 
 
-router.get('/getAllProduct', (req, res, next) =>
+router.get('/getAllProduct', validationMiddleware.validateToken, (req, res, next) =>
   controller
     .getAllProduct()
     .then((data) => res.status(200).send(data))
@@ -47,7 +47,9 @@ router.get('/deleteproductById/:id', (req, res, next) =>
     .catch((err) => next(err))
 );
 
-router.get('/getProductPhotoById/:id', (req, res, next) =>
+router.get('/getProductPhotoById/:id',
+  validationMiddleware.validateToken,
+  validationMiddleware.validateAdmin, (req, res, next) =>
   controller
     .getProductPhotoById(req)
     .then((data) => res.status(200).send(data))

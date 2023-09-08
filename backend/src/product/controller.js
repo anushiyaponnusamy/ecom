@@ -1,16 +1,12 @@
 const dbHelper = require('./dbHelper');
 const productViewModel = require('./viewModel');
-const categoryViewModel = require('./viewModel');
 
 const controller = {}
 controller.createproduct = async (req) => {
     try {
         if (!req.body.name) return 'field required';
-        const existingCategory = await dbHelper.checkCategory(req.body.name);
-        if (existingCategory) {
-            return 'category already exists'
-        }
-        return await dbHelper.createproduct(req.body.name);
+        const model = productViewModel.createViewModel(req)
+        return await dbHelper.createproduct(model);
     } catch (error) {
         return Promise.reject(error)
     }

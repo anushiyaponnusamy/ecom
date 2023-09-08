@@ -14,7 +14,7 @@ controller.signUp = async (req) => {
         const hashedPassword = await hashPassword(req.body.password)
         const viewModels = userViewModel.signUpViewModel(req, hashedPassword);
         const result = await dbHelper.signUp(viewModels);
-        const token = JWT.sign({ userId: result._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+        const token = JWT.sign({ userId: result._id }, process.env.JWT_SECRET, { expiresIn: "10d" });
 
         return { ...result._doc, token }
 

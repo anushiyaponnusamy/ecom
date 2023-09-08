@@ -8,11 +8,19 @@ import Spinner from "../Spinner";
 const AdminRoute = () => {
     const [ok, setOk] = useState(false);
     const [apiExecuted, setApiExecuted] = useState(false);
-    const [auth] = useAuth(); // Avoid setting state directly from useAuth
+    const accessToken = localStorage.getItem("token");
+    console.log(accessToken)
+    const headers = {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+        },
+    };
     useEffect(() => {
         const authCheck = async () => {
             try {
-                const res = await axios.get(config.REACT_APP_API + '/auth/admin-auth', { headers: { "Authorization": auth?.token } });
+                const res = await axios.get(config.REACT_APP_API + '/auth/admin-auth', headers);
 
                 if (res.data.ok) {
                     setOk(true);
@@ -26,12 +34,12 @@ const AdminRoute = () => {
             }
         };
 
-        if (auth?.token) {
+        if (accessToken) {
             authCheck();
         } else {
             setApiExecuted(true);
         }
-    }, [auth?.token]);
+    }, [accessToken]);
 
     if (!apiExecuted) {
         return null;

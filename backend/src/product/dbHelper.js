@@ -1,11 +1,10 @@
 
 const ProductSchema = require('./model')
-const slugify = require('slugify')
 const dbHelper = {}
 
-dbHelper.createproduct = async (name) => {
+dbHelper.createproduct = async (input) => {
     try {
-        const obj = new ProductSchema({ name, slug: slugify(name) });
+        const obj = new ProductSchema(input);
         return await obj.save();
     } catch (error) {
         return Promise.reject(error)

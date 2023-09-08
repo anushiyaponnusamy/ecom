@@ -1,25 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './AdminMenu.css';
+import { Menu, MenuItem } from '@mui/material';
 
 const AdminMenu = ({ handleMenuClick }) => {
+    const [productDropdown, setProductDropdown] = useState(false);
+
+    const handleProductMenu = (event) => {
+        setProductDropdown(!productDropdown);
+    };
     return (
         <div className="admin-menu">
             <NavLink
                 // to="/dashboard/admin/create-category"
                 onClick={() => handleMenuClick("category")}
-                activeClassName="active">
+                activeClassName="active" className='nav-link'>
                 Create a Category
             </NavLink>
+            <div className='product-dropdown'>
+                <span onClick={handleProductMenu}>Product</span>
+                {productDropdown && <ul className="product-options">
+                    <li onClick={() => handleMenuClick("product-create")}>
+                        <NavLink activeClassName="active">Create</NavLink>
+                    </li>
+                    <li onClick={() => handleMenuClick("product-view")}>
+                        <NavLink activeClassName="active">View</NavLink>
+                    </li>
+                    <li onClick={() => handleMenuClick("product-edit")}>
+                        <NavLink activeClassName="active">Edit</NavLink>
+                    </li>
+                    {/* Add more products as needed */}
+                </ul>}
+            </div>
             <NavLink
-                // to="/dashboard/admin/create-product"
-                onClick={() => handleMenuClick("product")}
-                activeClassName="active">
-                Create a Product
-            </NavLink>
-            <NavLink
-                //  to="/dashboard/admin/users" 
-                onClick={() => handleMenuClick("users")}
+                className='nav-link' onClick={() => handleMenuClick("users")}
                 activeClassName="active">
                 Users
             </NavLink>

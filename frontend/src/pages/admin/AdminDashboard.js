@@ -8,6 +8,8 @@ import UserList from './UserList';
 import Grid from '@mui/material/Grid';
 import './Admindashboard.css';
 import Layout from '../../components/layout/layout';
+import ProductView from './ProductView';
+import ProductEdit from './ProductEdit';
 
 const AdminDashboard = () => {
     const [selectedMenu, setSelectedMenu] = useState('category');
@@ -25,7 +27,9 @@ const AdminDashboard = () => {
                 <Grid item xs={10} className="content">
                     <div className="content-inner">
                         {selectedMenu === 'category' && <CreateCategory />}
-                        {selectedMenu === 'product' && <CreateProduct />}
+                        {selectedMenu === 'product-create' && <CreateProduct />}
+                        {selectedMenu === 'product-view' && <ProductView />}
+                        {selectedMenu === 'product-edit' && <ProductEdit />}
                         {selectedMenu === 'users' && <UserList />}
 
                     </div>

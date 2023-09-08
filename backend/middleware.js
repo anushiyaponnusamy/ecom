@@ -5,13 +5,21 @@ const validationMiddleware = {}
 
 validationMiddleware.validateToken = async (req, res, next) => {
     try {
-        const decoded = jwtToken.verify(req.headers.authorization, process.env.JWT_SECRET);
-
-        if (decoded) {
-            const user = await dbHelper.getUserByUserId(decoded._id);
-            req.decoded = user;
+        const token = req.headers.authorization;
+        if (!token) {
+            return res.status(401).json({ message: 'No token provided' });
         }
-        next();
+
+        try {
+            const decoded = jwtToken.verify(token, process.env.JWT_SECRET);
+            if (decoded?._id) {
+                const user = await dbHelper.getUserByUserId(decoded._id);
+                req.decoded = user;
+                next();
+            }
+        } catch (error) {
+            return res.status(401).json({ message: 'Invalid token' });
+        }
     } catch (error) {
         return Promise.reject(error)
     }

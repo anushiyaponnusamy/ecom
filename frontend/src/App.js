@@ -15,6 +15,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import CreateCategory from "./pages/admin/CreateCategory";
 import CreateProduct from "./pages/admin/CreateProduct";
 import UserList from "./pages/admin/UserList";
+import ProductView from "./pages/admin/ProductView";
 const App = () => {
   return (
     <>
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="admin/create-category" element={<CreateCategory />} />
           <Route path="admin/users" element={<UserList />} />
           <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route path="admin/products" element={<ProductView />} />
         </Route>
         <Route path="/signup" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />

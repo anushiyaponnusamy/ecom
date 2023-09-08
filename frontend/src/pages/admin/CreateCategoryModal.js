@@ -22,7 +22,9 @@ const CreateCategoryModal = (props) => {
     const { open, handleClose, isEdit, categoryDetails, fetchCategories } = props;
     const [categoryName, setCategoryName] = useState('');
     const handleCreateCategory = () => {
+        console.log("categoryName")
         createCategory(categoryName).then((response) => {
+
             if (response.data) {
                 fetchCategories()
                 handleClose()
@@ -68,7 +70,7 @@ const CreateCategoryModal = (props) => {
                         {isEdit ? <><Button variant="contained" className='bg-color-ecom' onClick={() => handleEditCategory()}
                         >
                             Update
-                        </Button> <Button variant="contained" className='bg-color-ecom' onClick={() => handleEditCategory()}
+                        </Button> <Button variant="contained" className='bg-color-ecom' onClick={() => handleClose()}
                         >
                                 Cancel
                             </Button> </> : <><Button variant="contained" className='bg-color-ecom' onClick={() => handleCreateCategory()} >

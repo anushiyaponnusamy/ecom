@@ -7,18 +7,25 @@ import config from "../../config";
 import Spinner from "../Spinner";
 const PrivateRoute = () => {
     const [ok, setOk] = useState(false);
-    const [auth, setAuth] = useAuth();
+    const accessToken = localStorage.getItem("token");
+    const headers = {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+        },
+    };
     useEffect(() => {
         const authCheck = async () => {
-            const res = await axios.get(config.REACT_APP_API + '/auth/user-auth', { headers: { "Authorization": auth?.token } });
+            const res = await axios.get(config.REACT_APP_API + '/auth/user-auth', headers);
             if (res.data.ok) {
                 setOk(res.data.ok)
             } else {
                 setOk(false)
             }
         }
-        if (auth?.token) authCheck();
-    }, [auth?.token])
+        if (accessToken) authCheck();
+    }, [accessToken])
     return ok ? <Outlet /> : <Spinner path="/login" />
 }
 

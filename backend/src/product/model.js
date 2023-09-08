@@ -28,7 +28,7 @@ const productSchema = new Mongoose.Schema({
   },
   category: {
     type: Mongoose.Schema.Types.ObjectId, // Reference to ObjectId
-    ref: 'Category', // Reference to the Category model
+    ref: 'category', // Reference to the Category model
     required: true
   },
   shipping: {

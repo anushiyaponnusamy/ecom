@@ -13,7 +13,7 @@ const uploadImage = async (selectedFile) => {
 
     const formData = new FormData();
     formData.append('image', selectedFile);
-    const response = await axios.post(config.REACT_APP_API + 'uploadImage', formData, { headers });
+    const response = await axios.post(config.REACT_APP_API + '/uploadImage', formData, { headers });
     return response;
 
 };
@@ -27,6 +27,11 @@ const getAllUsers = async () => {
 const getAllCategories = async () => {
 
     let response = await axios.get(config.REACT_APP_API + '/category/getAllCategories', headers);
+    return response;
+};
+const getAllProducts = async () => {
+
+    let response = await axios.get(config.REACT_APP_API + '/product/getAllProduct', headers);
     return response;
 };
 
@@ -46,6 +51,24 @@ const deleteCategory = async (categoryId) => {
     let response = await axios.delete(config.REACT_APP_API + `/category/deleteCategoryById/${categoryId}`, headers);
     return response;
 };
+
+const createProduct = async (data) => {
+
+    let response = await axios.post(config.REACT_APP_API + '/product/create-product', data, headers);
+    return response;
+};
+const editProduct = async (categoryId, name) => {
+
+    let response = await axios.post(config.REACT_APP_API + '/product/update-product', { categoryId, name }, headers);
+    return response;
+};
+
+const deleteProduct = async (categoryId) => {
+
+    let response = await axios.delete(config.REACT_APP_API + `/product/deleteProductById/${categoryId}`, headers);
+    return response;
+};
 export {
-    getAllUsers, createCategory, uploadImage, getAllCategories, editCategory, deleteCategory
+    createProduct, editProduct, deleteProduct,
+    getAllUsers, createCategory, uploadImage, getAllCategories, editCategory, deleteCategory, getAllProducts
 };
