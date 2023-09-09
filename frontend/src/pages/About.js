@@ -4,9 +4,9 @@ import './About.css'
 
 const About = () => {
     return (
-        <Layout title='About Us | Shoppingg'>
+        <Layout title='About Us | TickTick'>
             <div className="about-page-container">        <div className="about-page-content">
-                <h1>Welcome to Shoppingg!</h1>
+                <h1>Welcome to TickTick!</h1>
                 <p>At ShopWorld, we are dedicated to providing you with the best online shopping experience.</p>
 
                 <h2>Our Mission</h2>
@@ -25,15 +25,15 @@ const About = () => {
 
                 <h2>Contact Us</h2>
                 <p>If you have any questions, suggestions, or feedback, don't hesitate to reach out to us:</p>
-                <p><strong>Email:</strong> <a href="mailto:info@Shoppingg.com">info@Shoppingg.com</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@TickTick.com">info@TickTick.com</a></p>
                 <p><strong>Phone:</strong> 1-800-123-4567</p>
 
                 <h2>Join Our Community</h2>
                 <p>Connect with us on social media to stay updated on the latest products, promotions, and news:</p>
                 <ul className="social-media-links">
-                    <li><a href="https://www.facebook.com/Shoppingg" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                    <li><a href="https://www.twitter.com/Shoppingg" target="_blank" rel="noopener noreferrer">Twitter</a></li>
-                    <li><a href="https://www.instagram.com/Shoppingg" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://www.facebook.com/TickTick" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.twitter.com/TickTick" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                    <li><a href="https://www.instagram.com/TickTick" target="_blank" rel="noopener noreferrer">Instagram</a></li>
                 </ul>
 
                 <p>Thank you for choosing ShopWorld. Happy shopping!</p>

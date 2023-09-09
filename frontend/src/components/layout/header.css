@@ -34,11 +34,12 @@
 }
 
 .dropdown-item:hover {
-    background-color: palevioletred;
+    background-color: #1B1212;
     transform: scale(1.05);
+    color: white;
 }
 
 .username {
-    color: #da3a56;
+    color: #1B1212;
     font-weight: bold;
 }

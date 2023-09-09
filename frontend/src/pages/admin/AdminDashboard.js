@@ -37,11 +37,11 @@ const AdminDashboard = () => {
     return (
         <Layout>
             <Grid container className="layout-container">
-                <Grid item xs={2} className='sidebar sidebar-open'>
+                <Grid item xs={3} className='sidebar sidebar-open'>
                     {sideBarOpen ? <AdminMenu handleMenuClick={handleMenuClick} handleClose={toggleSidebar} />
                         : <MdViewSidebar onClick={toggleSidebar} />}
                 </Grid>
-                <Grid item xs={10} className="content">
+                <Grid item xs={9} className="content">
                     <div className="content-inner">
                         {selectedMenu === 'category' && <CreateCategory />}
                         {selectedMenu === 'product-create' && <CreateProduct handleRedirect={handleMenuClick} />}

@@ -63,7 +63,7 @@ const RegisterPage = () => {
         isPasswordValid()
     }, [password])
     return (
-        <Layout title="Sign Up | shoppingg">
+        <Layout title="Sign Up | TickTick">
             <div className="register-page-container">
                 <div className="register-form">
                     <h1>Sign Up</h1>

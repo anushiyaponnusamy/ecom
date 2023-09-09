@@ -23,7 +23,7 @@ const Layout = ({ children, title, description, keyword }) => {
 }
 
 Layout.defaultProps = {
-    title: 'shoppingg!',
+    title: 'TickTick!',
     description: 'all things shopping',
     keyword: 'medicine,lifestyle,costumes,chocolates',
     author: 'Anushiya'

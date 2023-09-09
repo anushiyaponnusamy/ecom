@@ -6,7 +6,7 @@ import { BiMobile } from 'react-icons/bi'
 import './ContactPage.css'
 const ContactPage = () => {
     return (
-        <Layout title='Contact | Shoppingg'>
+        <Layout title='Contact | TickTick'>
             <div className="contact__page">
                 <div style={{ flex: 1 }}>
                     <img src={ContactImage} alt="Contact Us" style={{ maxWidth: "100%", height: "auto" }} />

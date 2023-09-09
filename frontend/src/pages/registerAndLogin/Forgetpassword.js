@@ -57,7 +57,7 @@ const Forgetpassword = () => {
     };
 
     return (
-        <Layout title="ForgotPassword | shoppingg">
+        <Layout title="ForgotPassword | TickTick">
             <div className="register-page-container">
                 <div className="register-form">
                     <h1>Reset Password</h1>  <input

@@ -7,7 +7,7 @@ const PageNotFound = () => {
     const navigateToHome = () => {
         navigate('/')
     }
-    return (<Layout title='PageNotFound | Shoppingg'>
+    return (<Layout title='PageNotFound | TickTick'>
         <div className='pagenotfound'>
             <div className='textAlignCenter'>
                 <h1 style={{ fontWeight: "700" }}>404</h1>

@@ -27,8 +27,8 @@ const ProductView = ({ handleRedirect, handleEdit }) => {
 
     return (
         <div >
-            <Button variant="contained" className='bg-color-ecom' onClick={() => handleRedirect("product-create")}>
-                <AiOutlinePlus size={20} style={{ color: 'red', marginRight: '5px' }} />
+            <Button variant="contained" className='bg-color-ecom' style={{ backgroundColor: 'black', color: 'white' }} onClick={() => handleRedirect("product-create")}>
+                <AiOutlinePlus size={20} style={{ color: 'white', marginRight: '5px' }} />
                 Create Product
             </Button>
 
@@ -47,7 +47,7 @@ const ProductView = ({ handleRedirect, handleEdit }) => {
                         <div className="product-front">
                             <img src={product.photo} alt={product.title} />
                             <div className="product-details">
-                                <h4>{product.name}</h4>
+                                <h4 style={{ color: 'black' }}>{product.name}</h4>
                                 <p>{product.description.substring(0, 30) + '...'}</p>
                             </div>
                         </div>

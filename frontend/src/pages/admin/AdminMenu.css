@@ -1,7 +1,7 @@
 .admin-menu {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to right, skyblue, pink);
+    /* background: linear-gradient(to right, skyblue, pink); */
     width: 250px;
     /* height: 70vh; */
 }
@@ -11,7 +11,7 @@
     padding: 10px;
     margin: 5px 0;
     text-decoration: none;
-    color: #da3a56;
+    color: #1B1212;
     transition: background-color 0.3s ease-in, color 0.3s ease-in;
 }
 
@@ -26,7 +26,7 @@
     padding: 10px;
     margin: 5px 0;
     text-decoration: none;
-    color: #da3a56;
+    color: #1B1212;
     transition: background-color 0.3s ease-in, color 0.3s ease-in;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .admin-menu a:hover {
-    background: #FF1493;
+    background: rgb(85, 83, 84);
     color: white;
 }
 

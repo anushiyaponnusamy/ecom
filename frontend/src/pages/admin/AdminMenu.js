@@ -11,8 +11,14 @@ const AdminMenu = ({ handleMenuClick, handleClose }) => {
     return (
         <div className="admin-menu">
             {mobileView && (
-                <div style={{ display: 'flex', }}>  <IoMdClose onClick={handleClose} /></div>
-            )}
+                <div style={{
+                    display: 'flex',
+                    alignContent: 'center',
+                    justifyContent: "space-around",
+                    marginTop: "9px"
+                }}>  <IoMdClose onClick={handleClose} /></div>
+            )
+            }
             <NavLink
                 // to="/dashboard/admin/create-category"
                 onClick={() => handleMenuClick("category")}
@@ -32,7 +38,7 @@ const AdminMenu = ({ handleMenuClick, handleClose }) => {
                 Users
             </NavLink>
 
-        </div>
+        </div >
     );
 }
 

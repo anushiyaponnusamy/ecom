@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineShoppingCart, AiFillClockCircle } from 'react-icons/ai';
 
 import { MdArrowDropDownCircle } from 'react-icons/md';
 import { useAuth } from '../../context/auth'
@@ -54,7 +54,7 @@ const Header = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-                        <Link className="navbar-brand" to="/"><AiOutlineShoppingCart style={{ marginBottom: "5px", marginRight: "3px" }} />Shoppingg!</Link>
+                        <Link className="navbar-brand" to="/"><AiFillClockCircle style={{ marginBottom: "5px", marginRight: "3px" }} />TickTick!</Link>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <NavLink className="nav-link " to="/">Home</NavLink>

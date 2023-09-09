@@ -48,7 +48,7 @@ const LoginPage = () => {
     };
 
     return (
-        <Layout title="Login | shoppingg">
+        <Layout title="Login | TickTick">
             <div className="register-page-container">
                 <div className="register-form">
                     <h1>Sign In</h1>

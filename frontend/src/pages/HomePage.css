@@ -1,3 +1,5 @@
+/* HomePage.css */
+
 .shopping-background {
     background-size: cover;
     background-position: center;
@@ -7,18 +9,23 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-.highlighted-text {
-    font-family: cursive;
-    font-weight: 500;
+    position: relative;
+    /* Add relative positioning to the background container */
 }
 
 .shopping-content {
-    padding: 20px;
-    /* background-color: rgba(0, 0, 0, 0.6); */
-    color: revert;
-    max-width: 600px;
+    position: absolute;
+    /* Add absolute positioning to the content container */
+    top: 20px;
+    /* Adjust top to position it at the top */
+    right: 20px;
+    /* Adjust right to position it at the right */
+    /* padding: 40px;
+    background-color: rgba(0, 0, 0, 0.6); */
+    color: #F4F0EC;
+    /* Isabelline color */
+    max-width: 800px;
+    border-radius: 10px;
 }
 
 .heading_style {
@@ -27,21 +34,33 @@
 }
 
 .paragraph_style {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 20px;
+    line-height: 1.5;
+    color: lightgray;
+    /* Light Gray color */
+}
+
+.highlighted-text {
+    font-family: cursive;
+    font-weight: 500;
+    color: #A6A6A6;
+    /* Quick Silver color */
 }
 
 @media (max-width: 600px) {
     .shopping-content {
-        padding: 10px;
+        padding: 20px;
     }
 
     .heading_style {
-        font-size: 24px;
+        font-size: 28px;
         margin-bottom: 10px;
     }
 
     .paragraph_style {
-        font-size: 16px;
+        font-size: 18px;
+        color: #3B3B3B;
+        /* Black Olive color */
     }
 }

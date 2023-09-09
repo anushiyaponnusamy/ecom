@@ -11,7 +11,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: '#da3a56', // Pink background color
+    bgcolor: '#1B1212', // Pink background color
     // border: '2px solid #000',
     borderRadius: '8px', // Proper border radius
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // Box shadow

@@ -15,8 +15,8 @@ import DeleteCategoryModal from './DeleteCategoryModal';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: '#da3a56',
-        color: 'da3a56',
+        backgroundColor: '#1B1212',
+        color: 'white',
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -77,8 +77,8 @@ const CreateCategory = () => {
     return (
         <Container style={{ marginTop: '20px' }}>
             <div>
-                <Button variant="contained" className='bg-color-ecom' onClick={handleOpenCreateCategoryModal}>
-                    <AiOutlinePlus size={20} style={{ color: 'red', marginRight: '5px' }} />
+                <Button variant="contained" className='bg-color-ecom' style={{ backgroundColor: 'black', color: 'white' }} onClick={handleOpenCreateCategoryModal}>
+                    <AiOutlinePlus size={20} style={{ color: 'white', marginRight: '5px' }} />
                     Create Category
                 </Button>
             </div>
@@ -101,12 +101,14 @@ const CreateCategory = () => {
                                 <StyledTableCell>{row.name}</StyledTableCell>
                                 <StyledTableCell>{row.createdDate}</StyledTableCell>
                                 <StyledTableCell style={{ display: "flex", flexDirection: "row" }}>
-                                    <Button variant="contained" className='bg-color-ecom' size="small"
+                                    <Button variant="contained" className='bg-color-ecom' size="small" style={{
+                                        backgroundColor: 'black', color: 'white'
+                                    }}
                                         onClick={() => handleEditCategory(row?.name, row?._id)}>
                                         Edit
                                     </Button>
                                     <Button variant="contained" className='bg-color-ecom' size="small"
-                                        style={{ marginLeft: '10px' }} onClick={() => handleOpenDeleteCategory(row?._id)}>
+                                        style={{ marginLeft: '10px', backgroundColor: 'black', color: 'white' }} onClick={() => handleOpenDeleteCategory(row?._id)}>
                                         Delete
                                     </Button>
                                 </StyledTableCell>
