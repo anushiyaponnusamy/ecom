@@ -34,7 +34,11 @@ const getAllProducts = async () => {
     let response = await axios.get(config.REACT_APP_API + '/product/getAllProduct', headers);
     return response;
 };
+const getProductById = async (id) => {
 
+    let response = await axios.get(config.REACT_APP_API + `/product/getProductById/${id}`, headers);
+    return response;
+};
 const createCategory = async (name) => {
 
     let response = await axios.post(config.REACT_APP_API + '/category/create-category', { name }, headers);
@@ -57,18 +61,19 @@ const createProduct = async (data) => {
     let response = await axios.post(config.REACT_APP_API + '/product/create-product', data, headers);
     return response;
 };
-const editProduct = async (categoryId, name) => {
+const editProduct = async (data) => {
 
-    let response = await axios.post(config.REACT_APP_API + '/product/update-product', { categoryId, name }, headers);
+    let response = await axios.post(config.REACT_APP_API + '/product/update-product', data, headers);
     return response;
 };
 
-const deleteProduct = async (categoryId) => {
+const deleteProduct = async (productId) => {
 
-    let response = await axios.delete(config.REACT_APP_API + `/product/deleteProductById/${categoryId}`, headers);
+    let response = await axios.delete(config.REACT_APP_API + `/product/deleteProductById/${productId}`, headers);
     return response;
 };
 export {
     createProduct, editProduct, deleteProduct,
-    getAllUsers, createCategory, uploadImage, getAllCategories, editCategory, deleteCategory, getAllProducts
+    getAllUsers, createCategory, uploadImage, getAllCategories,
+    editCategory, deleteCategory, getAllProducts, getProductById
 };

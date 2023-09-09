@@ -28,7 +28,7 @@ const inputStyle = {
 };
 
 
-const FormComponent = () => {
+const FormComponent = ({ handleRedirect }) => {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     const [product, setProduct] = useState({
@@ -72,16 +72,13 @@ const FormComponent = () => {
             setError('Please fill out all fields.');
             return;
         }
-        try {
-            createProduct(data).then((response) => {
-                if (response.data._id) {
-                    navigate('/')
-                }
-            }).catch((error) => console.log(error))
+        createProduct(data).then((response) => {
+            if (response.data._id) {
+                handleRedirect("product-view")
+            }
+        }).catch((error) => console.log(error))
 
-        } catch (error) {
 
-        }
         // setProduct({
         //     name: '',
         //     price: 0,
@@ -148,14 +145,20 @@ const FormComponent = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControl variant="outlined" required fullWidth>
-                                    <TextField
-                                        label="Shipping"
-                                        variant="outlined"
-                                        name="shipping"
+                                    <InputLabel>Shipping</InputLabel>
+                                    <Select
                                         value={product.shipping}
+                                        name="shipping"
                                         onChange={handleChange}
-                                        required
-                                    />
+                                        label="Shipping"
+                                    >
+                                        <MenuItem value="yes">
+                                            Yes
+                                        </MenuItem>
+                                        <MenuItem value="no">
+                                            No
+                                        </MenuItem>
+                                    </Select>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12}>
@@ -204,6 +207,7 @@ const FormComponent = () => {
                                 fullWidth
                                 variant="contained"
                                 color="primary"
+                                disabled={product.photo ? false : true}
                             >
                                 Submit
                             </Button>

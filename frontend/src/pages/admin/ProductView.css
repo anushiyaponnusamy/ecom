@@ -1,61 +1,89 @@
-.shopping-images-container {
+.product-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
-    /* Ensures the content is vertically centered on the page */
-    background: linear-gradient(120deg, pink, skyblue);
+    flex-wrap: wrap;
 }
 
-.shopping-image-grid {
-    margin: 10px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* Two columns */
-    gap: 20px;
-    /* Gap between images */
+.product-card {
+    width: 150px;
+    /* Adjust width for responsive design */
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+    margin: 20px;
 }
 
-/* HomePage.css */
+.product-card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
 
-.image-container {
+.product-front {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    justify-content: space-between;
+    /* padding: 13px 13px 0px 13px */
 }
 
-.image-container img {
-    width: 200px;
-    height: 190px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
+.product-front img {
+    width: 100%;
+    height: 100px;
+    /* max-height: 200px; */
+    object-fit: contain;
 }
 
-.image-container img:hover {
-    transform: scale(1.05);
+.product-details {
+    padding: 13px 13px 0px 13px
 }
 
-.image-container p {
-    margin-top: 10px;
+.product-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.product-description {
     font-size: 14px;
-    color: #333;
+    margin: 8px 0;
 }
 
-.heading_style {
-    font-family: cursive;
-    font-weight: 700;
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff6600;
+    text-align: right;
 }
 
-@media screen and (max-width: 768px) {
-    .shopping-image-grid {
-        grid-template-columns: repeat(2, 1fr);
-        /* Change to 2 columns for smaller screens */
-    }
+/* Style the product-icons container (positioned on top of the image) */
+.product-icons {
 
-    .image-container img {
-        width: 173px;
-        height: 185px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Style the edit and delete icons */
+.product-icons .edit-icon,
+.product-icons .delete-icon {
+    color: black;
+    font-size: 10px;
+    cursor: pointer;
+    margin-right: 2px;
+    /* Add spacing between the icons */
+    background-color: rgba(255, 255, 255, 0.7);
+    /* Background color with opacity */
+    border-radius: 50%;
+    /* Create a circular shape for the icons */
+    padding: 2px;
+    /* Add padding to the icons for better clickability */
+    display: inline-block;
+    /* Ensure inline display to respect spacing */
+    transition: background-color 0.3s ease;
+    /* Add a transition effect */
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(50% - 20px);
+        /* Adjust width for mobile view */
     }
 }

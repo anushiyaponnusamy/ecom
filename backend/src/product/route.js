@@ -40,7 +40,9 @@ router.get('/getProductBySlug/:slug', (req, res, next) =>
     .catch((err) => next(err))
 );
 
-router.get('/deleteproductById/:id', (req, res, next) =>
+router.delete('/deleteProductById/:id',
+  validationMiddleware.validateToken,
+  validationMiddleware.validateAdmin, (req, res, next) =>
   controller
     .deleteproductById(req)
     .then((data) => res.status(200).send(data))

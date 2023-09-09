@@ -16,7 +16,7 @@ controller.updateproduct = async (req) => {
     try {
         if (!req.body) return 'field required';
         const updateViewModel = productViewModel.updateViewModel(req);
-        return await dbHelper.updateproduct(updateViewModel, req.body.id);
+        return await dbHelper.updateproduct(updateViewModel, req.body._id);
     } catch (error) {
         return Promise.reject(error)
     }
@@ -48,6 +48,7 @@ controller.getProductBySlug = async (req) => {
 
 controller.deleteproductById = async (req) => {
     try {
+        if (!req.params.id) return 'field required';
         return await dbHelper.deleteproductById(req.params.id);
     } catch (error) {
         return Promise.reject(error)

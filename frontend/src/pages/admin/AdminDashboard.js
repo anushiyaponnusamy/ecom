@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { MdViewSidebar } from 'react-icons/md';
 import AdminMenu from './AdminMenu';
@@ -10,26 +10,43 @@ import './Admindashboard.css';
 import Layout from '../../components/layout/layout';
 import ProductView from './ProductView';
 import ProductEdit from './ProductEdit';
+import { useMediaQuery } from '@mui/material';
 
 const AdminDashboard = () => {
+
+    const mobileView = useMediaQuery("(max-width:768px)");
     const [selectedMenu, setSelectedMenu] = useState('category');
+    const [sideBarOpen, setSideBarOpen] = useState(true)
+    const [productId, setProductId] = useState("")
 
     const handleMenuClick = (menu) => {
         setSelectedMenu(menu);
     };
-
+    const toggleSidebar = () => {
+        setSideBarOpen(!sideBarOpen);
+    };
+    const handleSetProductId = (id) => {
+        setProductId(id)
+    }
+    useEffect(() => {
+        // Close the sidebar initially on mobile
+        if (mobileView) {
+            setSideBarOpen(false);
+        }
+    }, [mobileView]);
     return (
         <Layout>
             <Grid container className="layout-container">
                 <Grid item xs={2} className='sidebar sidebar-open'>
-                    <AdminMenu handleMenuClick={handleMenuClick} />
+                    {sideBarOpen ? <AdminMenu handleMenuClick={handleMenuClick} handleClose={toggleSidebar} />
+                        : <MdViewSidebar onClick={toggleSidebar} />}
                 </Grid>
                 <Grid item xs={10} className="content">
                     <div className="content-inner">
                         {selectedMenu === 'category' && <CreateCategory />}
-                        {selectedMenu === 'product-create' && <CreateProduct />}
-                        {selectedMenu === 'product-view' && <ProductView />}
-                        {selectedMenu === 'product-edit' && <ProductEdit />}
+                        {selectedMenu === 'product-create' && <CreateProduct handleRedirect={handleMenuClick} />}
+                        {selectedMenu === 'product-view' && <ProductView handleRedirect={handleMenuClick} handleEdit={handleSetProductId} />}
+                        {selectedMenu === 'product-edit' && <ProductEdit handleRedirect={handleMenuClick} productId={productId} />}
                         {selectedMenu === 'users' && <UserList />}
 
                     </div>

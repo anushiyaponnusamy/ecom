@@ -53,7 +53,7 @@ dbHelper.getProductPhotoById = (id) => {
 
 dbHelper.deleteproductById = (productId) => {
     try {
-        return ProductSchema.delete({ _id: productId });
+        return ProductSchema.deleteOne({ _id: productId });
     } catch (error) {
         return Promise.reject(error)
     }

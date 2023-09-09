@@ -1,37 +1,31 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './AdminMenu.css';
-import { Menu, MenuItem } from '@mui/material';
 
-const AdminMenu = ({ handleMenuClick }) => {
-    const [productDropdown, setProductDropdown] = useState(false);
+import { IoMdClose } from 'react-icons/io';
+import { Menu, MenuItem, useMediaQuery } from '@mui/material';
 
-    const handleProductMenu = (event) => {
-        setProductDropdown(!productDropdown);
-    };
+const AdminMenu = ({ handleMenuClick, handleClose }) => {
+    const mobileView = useMediaQuery("(max-width:768px)");
+
     return (
         <div className="admin-menu">
+            {mobileView && (
+                <div style={{ display: 'flex', }}>  <IoMdClose onClick={handleClose} /></div>
+            )}
             <NavLink
                 // to="/dashboard/admin/create-category"
                 onClick={() => handleMenuClick("category")}
                 activeClassName="active" className='nav-link'>
-                Create a Category
+                Category
             </NavLink>
-            <div className='product-dropdown'>
-                <span onClick={handleProductMenu}>Product</span>
-                {productDropdown && <ul className="product-options">
-                    <li onClick={() => handleMenuClick("product-create")}>
-                        <NavLink activeClassName="active">Create</NavLink>
-                    </li>
-                    <li onClick={() => handleMenuClick("product-view")}>
-                        <NavLink activeClassName="active">View</NavLink>
-                    </li>
-                    <li onClick={() => handleMenuClick("product-edit")}>
-                        <NavLink activeClassName="active">Edit</NavLink>
-                    </li>
-                    {/* Add more products as needed */}
-                </ul>}
-            </div>
+            <NavLink
+                // to="/dashboard/admin/create-category"
+                onClick={() => handleMenuClick("product-view")}
+                activeClassName="active" className='nav-link'>
+                Product
+            </NavLink>
+
             <NavLink
                 className='nav-link' onClick={() => handleMenuClick("users")}
                 activeClassName="active">
