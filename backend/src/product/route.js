@@ -33,9 +33,9 @@ router.get('/getProductById/:id', (req, res, next) =>
     .catch((err) => next(err))
 );
 
-router.get('/getProductBySlug/:slug', (req, res, next) =>
+router.get('/getProductsByCategory/:categoryId', (req, res, next) =>
   controller
-    .getProductBySlug(req)
+    .getProductsByCategory(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );

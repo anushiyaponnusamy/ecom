@@ -21,7 +21,6 @@ import { useNavigate } from 'react-router-dom';
 const ProductEdit = ({ handleRedirect, productId }) => {
     const [categories, setCategories] = useState([]);
 
-    const [categoryId, setCategoryId] = useState("");
     const [product, setProduct] = useState({
         _id: '',
         name: '',
@@ -29,17 +28,14 @@ const ProductEdit = ({ handleRedirect, productId }) => {
         description: '',
         quantity: 0,
         photo: '',
-        category: '',
+        categoryId: '',
         shipping: '',
     });
     const [error, setError] = useState('');
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        if (name === 'category') {
-            console.log(value)
-            setCategoryId(value)
-        }
+
         setProduct({ ...product, [name]: value })
     };
 
@@ -60,7 +56,7 @@ const ProductEdit = ({ handleRedirect, productId }) => {
             description: product.description,
             quantity: product.quantity,
             photo: product.photo,
-            category: product.category,
+            categoryId: product.categoryId,
             shipping: product.shipping,
         }
 
@@ -97,10 +93,9 @@ const ProductEdit = ({ handleRedirect, productId }) => {
                     description: response.data.description,
                     quantity: response.data.quantity,
                     photo: response.data.photo,
-                    category: response.data.category,
+                    categoryId: response.data.categoryId,
                     shipping: response.data.shipping,
                 })
-                setCategoryId(response.data.category._id)
             }
         }).catch((error) => {
             console.log(error)
@@ -185,8 +180,8 @@ const ProductEdit = ({ handleRedirect, productId }) => {
                             <Grid item xs={12}>
                                 <FormControl variant="outlined" required fullWidth>
                                     <InputLabel>Category</InputLabel>
-                                    <Select value={categoryId}
-                                        name="category"
+                                    <Select value={product.categoryId}
+                                        name="categoryId"
                                         onChange={handleChange}
                                         label="Category"
                                     >

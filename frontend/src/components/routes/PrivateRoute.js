@@ -12,7 +12,7 @@ const PrivateRoute = () => {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: accessToken,
+            'Authorization': `Bearer ${accessToken}`
         },
     };
     useEffect(() => {

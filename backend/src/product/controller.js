@@ -38,13 +38,6 @@ controller.getProductById = async (req) => {
     }
 }
 
-controller.getProductBySlug = async (req) => {
-    try {
-        return await dbHelper.getProductBySlug(req.params.slug);
-    } catch (error) {
-        return Promise.reject(error)
-    }
-}
 
 controller.deleteproductById = async (req) => {
     try {
@@ -62,4 +55,14 @@ controller.getProductPhotoById = async (req) => {
         return Promise.reject(error)
     }
 }
+
+controller.getProductsByCategory = async (req) => {
+    try {
+        if (!req.params.categoryId) return 'field required';
+        return await dbHelper.getProductsByCategory(req.params.categoryId);
+    } catch (error) {
+
+    }
+}
+
 module.exports = controller;

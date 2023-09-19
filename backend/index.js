@@ -3,6 +3,8 @@ const express = require("express");
 const authRouter = require('./src/user/route')
 const categoryRouter = require('./src/category/route')
 const productRouter = require('./src/product/route')
+const cartRouter = require('./src/cart/route');
+const wishlistRouter = require('./src/wishlist/route')
 const cors = require("cors");
 const connectToMongoDb = require("./mongodbConnection/databaseConnection");
 const uploadMiddleware = require("./src/uploadImage");
@@ -19,6 +21,8 @@ app.use(express.json());
 app.use('/auth', authRouter)
 app.use('/category', categoryRouter)
 app.use('/product', productRouter)
+app.use('/wishlist', wishlistRouter)
+app.use('/cart', cartRouter)
 app.get("/", (req, res) => {
   res.send({
     message: "root:ok",

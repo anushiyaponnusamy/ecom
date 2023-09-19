@@ -4,30 +4,29 @@ const validationMiddleware = require('../../middleware');
 
 const router = express.Router();
 
-router.post('/create-category', validationMiddleware.validateToken, validationMiddleware.validateAdmin, (req, res, next) =>
+router.post('/add-to-wishlist', validationMiddleware.validateToken, (req, res, next) =>
   controller
-    .createcategory(req)
+    .addToWishlist(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
 
-
-router.get('/getAllCategories', (req, res, next) =>
+router.get('/checkWishlist/:productId/:userId', validationMiddleware.validateToken, (req, res, next) =>
   controller
-    .getAllCategories(req)
+    .checkWishlist(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
-router.post('/update-category', validationMiddleware.validateToken, validationMiddleware.validateAdmin, (req, res, next) =>
+router.get('/getAllWishlistProducts/:userId', validationMiddleware.validateToken, (req, res, next) =>
   controller
-    .updatecategory(req)
+    .getAllWishlistProducts(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
 
-router.delete('/deleteCategoryById/:id', (req, res, next) =>
+router.delete('/deleteByProductIdAndUserId/:productId/:userId', validationMiddleware.validateToken, (req, res, next) =>
   controller
-    .deleteCategoryById(req)
+    .deleteByProductIdAndUserId(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );

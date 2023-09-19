@@ -61,7 +61,9 @@ const Header = () => {
                             </li> <li className="nav-item">
                                 <NavLink className="nav-link " to="/category">Category</NavLink>
                             </li>
-
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/wishlist">Wishlist</NavLink>
+                            </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/cart">Cart(0)</NavLink>
                             </li>  {!auth.user ? <> <li className="nav-item">

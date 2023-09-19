@@ -33,13 +33,6 @@ controller.getAllCategories = async () => {
     }
 }
 
-controller.getCategoryBySlug = async (req) => {
-    try {
-        return await dbHelper.getCategoryBySlug(req.params.id);
-    } catch (error) {
-        return Promise.reject(error)
-    }
-}
 controller.deleteCategoryById = async (req) => {
     try {
         return await dbHelper.deleteCategoryById(req.params.id)

@@ -1,11 +1,10 @@
 
 const CategorySchema = require('./model')
-const slugify = require('slugify')
 const dbHelper = {}
 
 dbHelper.createcategory = async (name) => {
     try {
-        const obj = new CategorySchema({ name, slug: slugify(name) });
+        const obj = new CategorySchema({ name });
         return await obj.save();
     } catch (error) {
         return Promise.reject(error)
@@ -26,13 +25,6 @@ dbHelper.getAllCategories = () => {
     }
 }
 
-dbHelper.getCategoryBySlug = (slug) => {
-    try {
-        return CategorySchema.findOne({ slug });
-    } catch (error) {
-        return Promise.reject(error)
-    }
-}
 
 dbHelper.updatecategory = async (categoryId, _name) => {
     try {

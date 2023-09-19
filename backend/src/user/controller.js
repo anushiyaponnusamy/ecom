@@ -31,7 +31,7 @@ controller.login = async (req) => {
         const isValid = await comparePassword(req.body.password, userExists.password);
         if (!isValid)
             return "invalid credentials";
-        const token = JWT.sign({ _id: userExists?._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+        const token = JWT.sign({ _id: userExists?._id }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60 });
         return { email: userExists.email, _id: userExists?._id, mobile: userExists?.mobile, role: userExists?.role, userName: userExists?.userName, token }
     } catch (error) {
         return Promise.reject(error)

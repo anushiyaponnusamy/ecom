@@ -54,6 +54,9 @@
     font-weight: 700;
     /* color: ; */
     text-align: right;
+    display: flex;
+    padding: 3px;
+    justify-content: space-between;
 }
 
 /* Style the product-icons container (positioned on top of the image) */

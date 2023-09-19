@@ -16,11 +16,21 @@ import CreateCategory from "./pages/admin/CreateCategory";
 import CreateProduct from "./pages/admin/CreateProduct";
 import UserList from "./pages/admin/UserList";
 import ProductView from "./pages/admin/ProductView";
+import CartPage from "./pages/cart";
+import WishlistPage from "./pages/wishlist";
 const App = () => {
   return (
     <>
+
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/" element={<PrivateRoute />}>
+          <Route path="cart" element={<Dashboard />} />
+        </Route> */}
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="wishlist" element={<WishlistPage />} />
+          <Route path="cart" element={<CartPage />} />
+        </Route>
         <Route path="/forget-password" element={<Forgetpassword />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />

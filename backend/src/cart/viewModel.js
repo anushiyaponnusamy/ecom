@@ -1,19 +1,18 @@
 
-const productViewModel = {}
+const cartViewModel = {}
 
-productViewModel.createViewModel = (req) => {
+cartViewModel.createViewModel = (req) => {
     const { body } = req;
     const viewModel = {}
-    viewModel.name = body.name;
+    viewModel.productId = body.productId;
+    viewModel.productName = body.productName;
     viewModel.price = body.price;
     viewModel.description = body.description;
-    viewModel.quantity = body.quantity;
     viewModel.photo = body.photo;
-    viewModel.categoryId = body.categoryId;
-    viewModel.shipping = body?.shipping;
+    viewModel.userId = body.userId;
     return viewModel
 }
-productViewModel.updateViewModel = (req) => {
+cartViewModel.updateViewModel = (req) => {
     const { body } = req;
     const viewModel = {}
 
@@ -37,4 +36,4 @@ productViewModel.updateViewModel = (req) => {
         viewModel.shipping = body.shipping
     return viewModel
 }
-module.exports = productViewModel;
+module.exports = cartViewModel;

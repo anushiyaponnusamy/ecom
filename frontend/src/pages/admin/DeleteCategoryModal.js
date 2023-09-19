@@ -41,7 +41,7 @@ const DeleteCategoryModal = (props) => {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2" >
-                        <h4 style={{ textAlign: "center" }}>Are you sure ?</h4>
+                        <h4 style={{ textAlign: "center", color: 'white' }}>Are you sure ?</h4>
                     </Typography>
 
                     <div class="buttonContainerStyle">

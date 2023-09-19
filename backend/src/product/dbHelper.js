@@ -21,7 +21,7 @@ dbHelper.updateproduct = async (viewModel, id) => {
 
 dbHelper.getAllProduct = () => {
     try {
-        return ProductSchema.find({}).populate('category').sort({ createdDate: -1 });
+        return ProductSchema.find({}).sort({ createdDate: -1 });
     } catch (error) {
         return Promise.reject(error)
     }
@@ -29,28 +29,28 @@ dbHelper.getAllProduct = () => {
 
 dbHelper.getProductById = (id) => {
     try {
-        return ProductSchema.findOne({ _id: id }).populate('category');
+        return ProductSchema.findOne({ _id: id })
     } catch (error) {
         return Promise.reject(error)
     }
 }
 
-dbHelper.getProductBySlug = (_slug) => {
-    try {
-        return ProductSchema.findOne({ slug: _slug }).populate('category');
-    } catch (error) {
-        return Promise.reject(error)
-    }
-}
 
 dbHelper.getProductPhotoById = (id) => {
     try {
-        return ProductSchema.findOne({ _id: id }).select({ photo: 1 }).populate('category').lean();
+        return ProductSchema.findOne({ _id: id }).select({ photo: 1 }).lean();
     } catch (error) {
         return Promise.reject(error)
     }
 }
 
+dbHelper.getProductsByCategory = (_categoryId) => {
+    try {
+        return ProductSchema.find({ categoryId: _categoryId }).lean();
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
 dbHelper.deleteproductById = (productId) => {
     try {
         return ProductSchema.deleteOne({ _id: productId });
