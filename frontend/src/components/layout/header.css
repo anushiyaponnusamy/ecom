@@ -43,3 +43,8 @@
     color: #1B1212;
     font-weight: bold;
 }
+
+.header__mobileview {
+    color: black;
+    background-color: white;
+}

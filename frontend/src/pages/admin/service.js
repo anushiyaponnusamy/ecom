@@ -31,7 +31,16 @@ const getAllCategories = async () => {
 };
 const getAllProducts = async () => {
 
-    let response = await axios.get(config.REACT_APP_API + '/product/getAllProduct', headers);
+    let response = await axios.get(config.REACT_APP_API + `/product/getAllProduct/${1}/${100}`, headers);
+    return response;
+};
+
+const getProductByCategories = async (categoryId, minPrice, maxPrice) => {
+
+    let response = await axios.post(config.REACT_APP_API + '/product/getProductByCategories', {
+        categoryId, minPrice,
+        maxPrice, pageNumber: 1, perPage: 100
+    }, headers);
     return response;
 };
 const getProductById = async (id) => {
@@ -75,5 +84,5 @@ const deleteProduct = async (productId) => {
 export {
     createProduct, editProduct, deleteProduct,
     getAllUsers, createCategory, uploadImage, getAllCategories,
-    editCategory, deleteCategory, getAllProducts, getProductById
+    editCategory, deleteCategory, getAllProducts, getProductById, getProductByCategories
 };

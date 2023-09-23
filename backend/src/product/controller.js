@@ -22,9 +22,9 @@ controller.updateproduct = async (req) => {
     }
 }
 
-controller.getAllProduct = async () => {
+controller.getAllProduct = async (req) => {
     try {
-        return await dbHelper.getAllProduct();
+        return await dbHelper.getAllProduct(parseInt(req.params.pageNumber, 10), parseInt(req.params.perPage, 10));
     } catch (error) {
         return Promise.reject(error)
     }
@@ -65,4 +65,14 @@ controller.getProductsByCategory = async (req) => {
     }
 }
 
+controller.getProductByCategories = async (req) => {
+    try {
+        console.log(req.body)
+        // if (!req.body.categoryId || !(req.body.minPrice && req.body.maxPrice)) return 'field required';
+        return await dbHelper.getProductByCategories(req.body.categoryId, req.body.minPrice, req.body.maxPrice
+            , parseInt(req.body.pageNumber, 10), parseInt(req.body.perPage, 10));
+    } catch (error) {
+
+    }
+}
 module.exports = controller;

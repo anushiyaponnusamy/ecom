@@ -19,9 +19,10 @@ dbHelper.updateproduct = async (viewModel, id) => {
     }
 }
 
-dbHelper.getAllProduct = () => {
+dbHelper.getAllProduct = (skipNumber, perPage) => {
     try {
-        return ProductSchema.find({}).sort({ createdDate: -1 });
+        const skip = (skipNumber - 1) * perPage;
+        return ProductSchema.find({}).sort({ createdDate: -1 }).skip(skip).limit(perPage);
     } catch (error) {
         return Promise.reject(error)
     }
@@ -59,4 +60,28 @@ dbHelper.deleteproductById = (productId) => {
     }
 }
 
+dbHelper.getProductByCategories = (categoryIdArray, minPrice, maxPrice, skipNumber, perPage) => {
+    try {
+        const skip = (skipNumber - 1) * perPage;
+
+        return ProductSchema.find({
+            $or: [
+                {
+                    $and: [
+                        { categoryId: { $in: categoryIdArray } },
+                        { price: { $gt: minPrice, $lt: maxPrice } },
+                    ],
+                },
+                {
+                    categoryId: { $in: categoryIdArray },
+                },
+                {
+                    price: { $gt: minPrice, $lt: maxPrice },
+                },
+            ],
+        }).skip(skip).limit(perPage).sort({ createdDate: -1 })
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
 module.exports = dbHelper;

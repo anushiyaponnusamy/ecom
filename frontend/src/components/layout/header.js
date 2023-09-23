@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { AiOutlineShoppingCart, AiFillClockCircle } from 'react-icons/ai';
-
+import MenuIcon from '@mui/icons-material/Menu';
 import { MdArrowDropDownCircle } from 'react-icons/md';
 import { useAuth } from '../../context/auth'
 import './header.css'
+
+import { AppBar, Drawer, IconButton, List, ListItem, ListItemText, Paper, Toolbar, Typography, useMediaQuery } from '@mui/material';
+
 const Header = () => {
     const [auth, setAuth] = useAuth();
+
+    const mobileView = useMediaQuery("(max-width:768px)");
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedValue, setSelectedValue] = useState("");
     const role = localStorage.getItem("role")
@@ -44,9 +49,74 @@ const Header = () => {
             LogoutUser();
         }
     }, [selectedValue])
-    return (
-        <>
+    const [open, setOpen] = useState(false);
 
+    const toggleSidebar = () => {
+        setOpen(!open);
+    };
+    return (
+        <>{mobileView ?
+            <>
+                <AppBar position="static" className='header__mobileview'>
+                    <Toolbar>
+                        <IconButton
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            onClick={toggleSidebar}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6">
+
+                            <Link className="navbar-brand" to="/"><AiFillClockCircle style={{ marginBottom: "5px", marginRight: "3px" }} />TickTick!</Link>
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer anchor="left" open={open} onClose={toggleSidebar} >
+                    <Paper style={{
+                        width: '250px',
+                        height: "auto",
+                        boxShadow: "none",
+                        marginTop: "30px"
+                    }}>
+                        <List >
+                            <ListItem style={{ margin: "0px 20px 20px 0px", fontSize: '25px' }}>
+
+                                <Link className="navbar-brand" to="/"><AiFillClockCircle style={{ marginBottom: "5px", marginRight: "3px" }} />TickTick!</Link>
+                            </ListItem>
+                            <ListItem button>
+                                <h3 style={{ fontWeight: '500' }}>{auth?.user?.userName}</h3>
+                            </ListItem>
+                            <ListItem button>
+                                <NavLink className="nav-link " to="/">Home</NavLink>
+                            </ListItem>
+                            <ListItem button>
+
+                                <NavLink className="nav-link " to="/category">Category</NavLink>
+                            </ListItem>
+                            <ListItem button>
+                                <NavLink className="nav-link" to="/cart">Cart(0)</NavLink>
+                            </ListItem>
+                            {!auth.user ? <> <ListItem button>
+
+                                <NavLink className="nav-link " to="/signup">Register</NavLink>
+                            </ListItem>
+                                <ListItem button>
+                                    <NavLink className="nav-link" to="/login">Login</NavLink>
+                                </ListItem>
+                            </> :
+                                <> <ListItem button>
+                                    <NavLink className="nav-link" onClick={() => handleDropdownChange("dashboard")}>Dashboard</NavLink>
+                                </ListItem>
+                                    <ListItem button>
+                                        <NavLink className="nav-link" onClick={() => handleDropdownChange("logout")}>Logout</NavLink>
+                                    </ListItem>
+                                </>}
+
+                        </List></Paper>
+                </Drawer></>
+            :
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,7 +163,7 @@ const Header = () => {
 
                     </div>
                 </div>
-            </nav>
+            </nav>}
         </>
     )
 }

@@ -12,9 +12,9 @@ router.post('/create-product', validationMiddleware.validateToken, validationMid
 );
 
 
-router.get('/getAllProduct', validationMiddleware.validateToken, (req, res, next) =>
+router.get('/getAllProduct/:pageNumber/:perPage', validationMiddleware.validateToken, (req, res, next) =>
   controller
-    .getAllProduct()
+    .getAllProduct(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
@@ -54,6 +54,13 @@ router.get('/getProductPhotoById/:id',
   validationMiddleware.validateAdmin, (req, res, next) =>
   controller
     .getProductPhotoById(req)
+    .then((data) => res.status(200).send(data))
+    .catch((err) => next(err))
+);
+router.post('/getProductByCategories',
+  validationMiddleware.validateToken, (req, res, next) =>
+  controller
+    .getProductByCategories(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
