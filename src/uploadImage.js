@@ -3,6 +3,7 @@
 
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
+const path = require('path');
 require('dotenv').config();
 
 // Cloudinary configuration
@@ -25,11 +26,17 @@ const uploadMiddleware = async (req, res, next) => {
           return res.status(500).json({ error: 'Server error' });
         }
 
-        resolve(); // Resolve the promise when the upload is successful
+        resolve();
       });
     });
-
-    const result = await cloudinary.uploader.upload(req.file.path);
+    if (!req.file) {
+      return res.status(400).json({ error: 'Missing file in the request' });
+    }
+    const base64 = req.file.buffer.toString('base64');
+    const result = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${base64}`, {
+      resource_type: 'auto', // 'auto' detects the file type
+      public_id: path.parse(req.file.originalname).name // Set your desired filename here
+    });
     const imageUrl = result.secure_url;
     req.imageUrl = imageUrl;
     next();

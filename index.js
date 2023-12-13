@@ -17,12 +17,7 @@ connectToMongoDb();
 const { PORT } = process.env;
 const app = express();
 app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    preflightContinue: true, // Allow redirection in preflight requests
-  })
+  cors()
 );
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb' }));
