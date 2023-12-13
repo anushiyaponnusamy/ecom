@@ -12,7 +12,9 @@ cloudinary.config({
   api_secret: '9G4HAkps8MsWp9FYa57nUo-aPJw'
 });
 // Multer configuration for file upload
-const upload = multer({ dest: 'images/' });
+const storage = multer.memoryStorage(); // Store the file in memory
+const upload = multer({ storage: storage });
+
 const uploadMiddleware = async (req, res, next) => {
   try {
     await new Promise((resolve, reject) => {
