@@ -41,6 +41,9 @@ const userSchema = new Mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  address: {
+  },
+
 });
 
 module.exports = Mongoose.model('user', userSchema);

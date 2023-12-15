@@ -81,4 +81,14 @@ controller.deleteUserByUserId = async (req) => {
         return Promise.reject(error)
     }
 }
+
+
+controller.updateAddress = async (req) => {
+    try {
+        if (!req.decoded._id && !req.body.address) return "field required";
+        return await dbHelper.updateAddress(req.decoded._id, req.body.address);
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
 module.exports = controller;

@@ -87,4 +87,11 @@ dbHelper.deleteUserByUserId = (userId) => {
     }
 }
 
+dbHelper.updateAddress = (userId, _address) => {
+    try {
+        return UserSchema.findOneAndUpdate({ _id: userId }, { $set: { address: _address } }, { new: true });
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
 module.exports = dbHelper;

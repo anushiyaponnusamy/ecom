@@ -54,11 +54,17 @@ router.get('/getUserByUserId/:userId', (req, res, next) =>
     .catch((err) => next(err))
 );
 
-router.get('/deleteUserByUserId/userId', (req, res, next) =>
+router.get('/deleteUserByUserId/userId', validationMiddleware.validateToken, validationMiddleware.validateAdmin, (req, res, next) =>
   controller
     .deleteUserByUserId(req)
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
 
+router.post('/updateAddress', validationMiddleware.validateToken, (req, res, next) =>
+  controller
+    .updateAddress(req)
+    .then((data) => res.status(200).send(data))
+    .catch((err) => next(err))
+);
 module.exports = router;
