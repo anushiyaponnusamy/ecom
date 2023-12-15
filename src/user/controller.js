@@ -85,6 +85,7 @@ controller.deleteUserByUserId = async (req) => {
 
 controller.updateAddress = async (req) => {
     try {
+        if (!req.decoded) return "field required"
         if (!req.decoded._id && !req.body.address) return "field required";
         return await dbHelper.updateAddress(req.decoded._id, req.body.address);
     } catch (error) {
