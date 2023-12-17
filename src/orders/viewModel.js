@@ -4,7 +4,7 @@ const cartViewModel = {}
 cartViewModel.createViewModel = (req) => {
     const { body } = req;
     const viewModel = {}
-    viewModel.userId = body.userId;
+    viewModel.userId = req.decoded._id;
     viewModel.productId = body.productId;
     viewModel.productName = body.productName;
     viewModel.price = body.price;
