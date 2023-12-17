@@ -67,4 +67,11 @@ router.post('/updateAddress', validationMiddleware.validateToken, (req, res, nex
     .then((data) => res.status(200).send(data))
     .catch((err) => next(err))
 );
+
+router.post('/updateUserDetails', validationMiddleware.validateToken, (req, res, next) =>
+  controller
+    .updateUserDetails(req)
+    .then((data) => res.status(200).send(data))
+    .catch((err) => next(err))
+);
 module.exports = router;

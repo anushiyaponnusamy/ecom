@@ -32,7 +32,14 @@ controller.login = async (req) => {
         if (!isValid)
             return "invalid credentials";
         const token = JWT.sign({ _id: userExists?._id }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60 });
-        return { email: userExists.email, _id: userExists?._id, mobile: userExists?.mobile, role: userExists?.role, userName: userExists?.userName, token, address: userExists?.address }
+        return {
+            email: userExists.email,
+            _id: userExists?._id,
+            mobile: userExists?.mobile,
+            role: userExists?.role,
+            userName: userExists?.userName,
+            token, address: userExists?.address
+        }
     } catch (error) {
         return Promise.reject(error)
     }
@@ -88,6 +95,17 @@ controller.updateAddress = async (req) => {
         if (!req.decoded) return "field required"
         if (!req.decoded._id && !req.body.address) return "field required";
         return await dbHelper.updateAddress(req.decoded._id, req.body.address);
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
+
+controller.updateUserDetails = async (req) => {
+    try {
+        if (!req.decoded) return "field required"
+        if (!req.body) return "field required";
+        const viewModelInput = userViewModel.updateUserDetails(req)
+        return await dbHelper.updateUserDetails(viewModelInput);
     } catch (error) {
         return Promise.reject(error)
     }

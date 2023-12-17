@@ -41,6 +41,10 @@ const userSchema = new Mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  profilePhoto: {
+    type: String
+  },
+
   address: {
   },
 

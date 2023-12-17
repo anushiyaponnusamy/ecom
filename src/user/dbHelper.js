@@ -94,4 +94,12 @@ dbHelper.updateAddress = (userId, _address) => {
         return Promise.reject(error)
     }
 }
+
+dbHelper.updateUserDetails = (input) => {
+    try {
+        return UserSchema.findOneAndUpdate({ _id: input?._id }, { $set: { ...input } }, { new: true });
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
 module.exports = dbHelper;
