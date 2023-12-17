@@ -76,8 +76,6 @@ controller.getProductsByCategory = async (req) => {
 
 controller.getProductByCategories = async (req) => {
     try {
-        console.log(req.body)
-        // if (!req.body.categoryId || !(req.body.minPrice && req.body.maxPrice)) return 'field required';
         return await dbHelper.getProductByCategories(req.body.categoryId, req.body.minPrice, req.body.maxPrice
             , parseInt(req.body.pageNumber, 10), parseInt(req.body.perPage, 10));
     } catch (error) {

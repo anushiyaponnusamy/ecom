@@ -27,11 +27,7 @@ controller.success = async (req) => {
 
         // THE PAYMENT IS LEGIT & VERIFIED
         // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
-        console.log({
-            msg: "success",
-            orderId: razorpayOrderId,
-            paymentId: razorpayPaymentId,
-        })
+
         return {
             msg: "success",
             orderId: razorpayOrderId,

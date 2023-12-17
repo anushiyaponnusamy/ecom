@@ -6,7 +6,7 @@ controller.addToCart = async (req) => {
     try {
         if (!req.body.productId && !req.body.userId) return 'field required';
         const existingAlreadyInCart = await dbHelper.checkCart(req.body.productId, req.body.userId);
-        console.log("existingAlreadyInCart", existingAlreadyInCart)
+
         if (existingAlreadyInCart) {
             return 'product already exists'
         }

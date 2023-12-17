@@ -2,15 +2,15 @@
 const cartViewModel = {}
 
 cartViewModel.createViewModel = (req) => {
-    const { body } = req;
+    const { body, decoded } = req;
     const viewModel = {}
-    viewModel.userId = req.decoded._id;
+
+    viewModel.userId = decoded._id.toString();
     viewModel.productId = body.productId;
     viewModel.productName = body.productName;
     viewModel.price = body.price;
     viewModel.description = body.description;
     viewModel.photo = body.photo;
-    viewModel.userId = body.userId;
     viewModel.transactionDetails = body.transactionDetails;
     return viewModel
 }

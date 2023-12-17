@@ -35,7 +35,7 @@ app.use('/order', orderRouter)
 app.get("/", (req, res, next) => res.status(200).json({ root: "ok" }));
 app.post('/uploadImage', uploadMiddleware, (req, res) => {
   const imageUrl = req.imageUrl;
-  console.log(imageUrl)
+
   res.send(imageUrl)
 });
 

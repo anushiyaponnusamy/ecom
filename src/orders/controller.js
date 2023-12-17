@@ -4,7 +4,6 @@ const orderViewModel = require('./viewModel');
 const controller = {}
 controller.createOrder = async (req) => {
     try {
-        console.log(req.body)
         if (!req.body.productId && !req.body) return 'field required'
         const orderInput = orderViewModel.createViewModel(req)
         return await dbHelper.createOrder(orderInput);

@@ -6,7 +6,6 @@ const validationMiddleware = {}
 validationMiddleware.validateToken = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
-        // console.log("req.headers.authorization", req.headers.authorization)
         if (!token) {
             return res.status(401).json({ message: 'No token provided' });
         }
