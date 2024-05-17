@@ -20,7 +20,9 @@ connectToMongoDb();
 const { PORT } = process.env;
 const app = express();
 app.use(
-  cors()
+  cors({
+    origin: process.env.FRONTEND_URL, credentials: true,
+  })
 );
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb' }));
